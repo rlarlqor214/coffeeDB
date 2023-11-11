@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <div class="create_form">
+            <a class="back" href="/"> 메인페이지로 </a>
+            <h1>장바구니</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>가격</th>
+                        <th>수량</th>
+                        <th>총 가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i=0; i < items.length; i++) { %>
+                    <tr>
+                        <td><%= items[i].menu_name %></td>
+                        <td><%= items[i].price %></td>
+                        <td>
+                            <form action="/basket/update" method="POST">
+                                <input type="hidden" name="menu_name" value="<%= items[i].menu_name %>" />
+                                <input class="input" type="number" name="quantities" value="<%= items[i].quantity %>" min="1" />
+                                <td><%= items[i].total_price %></td>
+                                <td><input type="submit" value="수정" /></td>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/basket/delete" method="POST">
+                                <input type="hidden" name="menu_name" value="<%= items[i].menu_name %>" />
+                                <input type="submit" vanpe="삭제" />
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+        
+            </table>
+            <div>
+                <form action="/order" method="POST">
+                    <div class="payment-method">
+                      <label>
+                        <input type="radio" name="paymentMethod" value="credit" checked>
+                        신용카드
+                      </label>
+                      <label>
+                        <input type="radio" name="paymentMethod" value="cash">
+                        현금
+                      </label>
+                    </div>
+                    <button type="submit">주문하기</button>
+                  </form>
+            </div>
+    
+            <footer></footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <div class="create_form">
+            <a class="back" href="/"> 메인페이지로 </a>
+            <form action="/create/signup" method="POST">
+                <div class="element">
+                    <p>아이디</p>
+                    <input class="input" type="text" name="uid" />
+                    <p>패스워드</p>
+                    <input class="input" type="text" name="upw" />
+                    <p>이름</p>
+                    <input class="input" type="text" name="uname" />
+                    <p>전화번호</p>
+                    <input class="input" type="text" name="unumber" />
+                    <p>주소</p>
+                    <input class="input" type="text" name="uaddress" />
+                    <input class="submit_btn" type="submit" value="회원가입" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

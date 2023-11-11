@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <div>
+            <div>이름 : <%= name %></div>
+            <div>정가 : <%= price %></div>
+            <div><a class="back" href="/menu">뒤로가기</a></div>
+            <div><button onclick="addToBasket('<%= menu_name %>')">장바구니 추가</button></div>
+            <form action="/pieceorder" method="POST">
+                <input type="hidden" name="menu_name" value="<%= menu_name %>">
+                <div class="payment-method">
+                  <label>
+                    <input type="radio" name="paymentMethod" value="credit" checked>
+                    신용카드
+                  </label>
+                  <label>
+                    <input type="radio" name="paymentMethod" value="cash">
+                    현금
+                  </label>
+                </div>
+                <button type="submit">주문하기</button>
+              </form>
+    </div>
+        </div>
+        <script>
+            function addToBasket(menu_name) {
+                fetch("/addToBasket", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ menu_name: menu_name }),
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            alert("장바구니에 추가되었습니다");
+                        } else {
+                            alert("오류 발생");
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        </script>
+    </body>
+</html>

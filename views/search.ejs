@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title><%= title %></title>
+</head>
+<body>
+    <a class="back" href="/menu"> 뒤로가기 </a>
+    <div class="menu">
+        <div>
+            <% for(var i = 0; i < menu.length; i++) { %>
+                <a href="/detail/<%= menu[i].menu_number%>" class="detail">
+                    <div class="left">
+                        <p><%= menu[i].menu_name %></p>
+                    </div>
+                    <div class="right">
+                        <span>가격:</span><span class="price"><%= menu[i].price %>원</span>
+                    </div>
+                </a>
+                <% } %>
+        </div>
+    </div>
+</body>
+</html>
