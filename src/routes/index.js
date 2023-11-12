@@ -28,11 +28,6 @@ router.post("/search", menuController.searchmenu);
 //메뉴 검색 페이지
 router.get("/search", searchController.renderSearchmenu);
 
-//관리자 메뉴 추가,삭제 페이지
-router.get("/addmenu", menuController.renderAddmenu);
-router.post("/addmenu", menuController.addMenu);
-router.post("/menudelete", menuController.deleteMenu);
-
 //메뉴 상세페이지
 router.get("/detail/:id", menudetailController.rendermenuDetail);
 
