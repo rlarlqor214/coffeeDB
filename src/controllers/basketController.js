@@ -35,21 +35,14 @@ exports.addToCart = async (req, res) => {
 
         const number = menuInfo[0][0].menu_number;
         const price = menuInfo[0][0].price;
-        const basketInfo = await pool.query("select basketId from basket where user_userId = ?", [userId]);
-        let basketId;
-
-        if(basketInfo[0].length == 0){
-            const basketAdd = await pool.query("insert into basket(user_userId) values (?)" , [userId]);
-            basketId = basketAdd[0].insertId;
-        }else{
-            basketId = basketInfo[0][0].basketId
-        }
+        const basketnumber = await pool.query("select basketId from basket where user_userId = ?", [userId]);
+            basketId = basketnumber[0][0].basketId
             const menuinbasket = await pool.query("select quantity from basket_has_menu where basket_basketId = ? and menu_menu_number = ?",[basketId,number]);
             if(menuinbasket[0].length == 0){
                 await pool.query("insert into basket_has_menu (basket_basketId, menu_menu_number, menu_name, price,quantity) values (?,?,?,?,?)", [basketId,number,menuName,price,1]);
             }else{
                 await pool.query("update basket_has_menu set quantity = quantity + 1 where basket_basketId = ? and menu_menu_number =?",[basketId,number]);
-            }
+        }
     }catch(error){
         console.log(error);
     }
@@ -62,7 +55,7 @@ exports.updateBasket = async (req, res) => {
         const basketInfo = await pool.query("select basketId from basket where user_userId = ?", [userId]);
         basketId = basketInfo[0][0].basketId
 
-        const update = await pool.query("UPDATE basket_has_menu SET quantity = ? WHERE basket_basketId = ? AND menu_name = ?", [
+        const updatemenu = await pool.query("UPDATE basket_has_menu SET quantity = ? WHERE basket_basketId = ? AND menu_name = ?", [
             quantities,
             basketId,
             menu_name,
