@@ -59,7 +59,6 @@ exports.remove = async (req, res) => {
         }
 
         await pool.query("delete from basket_has_menu where basket_basketId = ?", [basketId]);
-        await pool.query("delete from basket where user_userId = ?" , [userId]);
         return res.send('<script>alert("주문이 완료되었습니다"); location.href="/"</script>');
 
     }catch(error){

@@ -45,9 +45,22 @@
                     <div class="right">
                         <span>가격:</span><span class="price"><%= menu[i].price %>원</span>
                     </div>
+                    <% if (userId === "9999") { %>}
+                    <td>
+                        <form action="/menudelete" method="POST">
+                            <input type="hidden" name="menu_name" value="<%= menu[i].menu_number %>" />
+                            <input type="submit" value="<%= menu[i].menu_number %> 삭제" />
+                        </form>
+                    </td>
+                    <% } %>
                 </a>
                 <% } %>
         </div>
+        <div>
+            <% if(userId === "9999") { %>
+                <a href="/addmenu">메뉴 추가</a>
+                <% } %>
+            </div>
     </div>
 </body>
 </html>

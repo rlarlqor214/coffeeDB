@@ -24,8 +24,14 @@ exports.login = async (req, res) => {
         } else {
             if (userpw == isuser[0][0].password) {
                 req.session.uid = userid;
-                console.log(req.session);
-                return res.redirect("/");
+                userId = req.session.uid;
+                const basketNumber = await pool.query("select basketId from basket where user_userId = ?", [userId]);
+                if(basketNumber[0][0] === undefined){
+                    const basket = await pool.query("insert into basket(user_userId) values(?)", [userId]);
+                    return res.redirect("/");
+                }else{
+                    return res.redirect("/");
+                }
             } else {
                 return res.send('<script>alert("패스워드가 틀렸습니다"); location.href="/login"</script>');
             }

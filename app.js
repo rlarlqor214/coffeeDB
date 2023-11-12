@@ -45,6 +45,7 @@ app.use("menu", menuRouter);
 app.use("search", searchRouter);
 app.use("detail", detailRouter);
 app.use("basekt", basketRouter);
+app.use("addmenu",menuRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

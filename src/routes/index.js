@@ -25,6 +25,11 @@ router.post("/login", loginController.login);
 router.get("/menu" , menuController.rendermenu);
 router.post("/search", menuController.searchmenu);
 
+//메뉴 관리자 페이지
+router.get("/addmenu", menuController.renderAddmenu);
+router.post("/addmenu", menuController.addMenu);
+router.post("/menudelete", menuController.deleteMenu);
+
 //메뉴 검색 페이지
 router.get("/search", searchController.renderSearchmenu);
 
