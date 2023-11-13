@@ -44,9 +44,12 @@ exports.addMenu = async (req,res) => {
     }
 };
 
+
+// 주문에 해당 메뉴가 없을 경우 가능 아니면 제약조건으로 인해 삭제 불가능
 exports.deleteMenu = async (req, res) => {
     try {
-        const menuNumber = req.body.menu_name[0];
+        const menuNumber = req.body.menu_name;
+        console.log(menuNumber)
         const deleteBasketItems = await pool.query("DELETE FROM basket_has_menu WHERE menu_menu_number = ?", [menuNumber]);
         const deleteMenu = await pool.query("DELETE FROM menu WHERE menu_number = ?", [menuNumber]);
         return res.send('<script>alert("메뉴가 정상적으로 삭제되었습니다."); location.href="/menu"</script>');
